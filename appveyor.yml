@@ -48,8 +48,10 @@ install:
 build: false
 
 test_script:
-  - cmd: conda create --yes -n buildenv python=%PYTHON_VERSION% hdf5 numexpr cython
+  - cmd: conda create --yes -n buildenv python=%PYTHON_VERSION% numexpr cython
   - cmd: activate buildenv
+  # conda-forge has hdf5-1.8.17 with shared libs
+  - cmd: conda install --yes --channel conda-forge hdf5 
   - cmd: set HDF5_DIR=%CONDA_PREFIX%\Library\
   - cmd: set LIBRARY_PREFIX=%CONDA_PREFIX%\Library\
   - "%CMD_IN_ENV% python setup.py build"
