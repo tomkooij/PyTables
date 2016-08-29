@@ -52,6 +52,9 @@ test_script:
   - cmd: activate buildenv
   # conda-forge has hdf5-1.8.17 with shared libs
   - cmd: conda install --yes --channel conda-forge hdf5 
+  - cmd: set PATH=%CONDA_PREFIX%\\Library\\bin;%PATH%
+  - cmd: echo %PATH%
+  - cmd: env
   - cmd: set HDF5_DIR="%CONDA_PREFIX%\Library\"
   - cmd: set LIBRARY_PREFIX="%CONDA_PREFIX%\Library\"
   - "%CMD_IN_ENV% python setup.py build"
