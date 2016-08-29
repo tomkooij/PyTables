@@ -43,7 +43,7 @@ install:
   # as well as pip, conda-build, and the binstar CLI
   - powershell .\\ci\\appveyor\\install.ps1   
   - powershell ./appveyor/missing-headers.ps1
-  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%CONDA_PREFIX%;%PATH%"
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%CONDA_PREFIX%\\Library\\bin;%PATH%"
 
 build: false
 
@@ -52,7 +52,7 @@ test_script:
   - cmd: activate buildenv
   # conda-forge has hdf5-1.8.17 with shared libs
   - cmd: conda install --yes --channel conda-forge hdf5 
-  - cmd: set HDF5_DIR=%CONDA_PREFIX%\Library\
-  - cmd: set LIBRARY_PREFIX=%CONDA_PREFIX%\Library\
+  - cmd: set HDF5_DIR="%CONDA_PREFIX%\Library\"
+  - cmd: set LIBRARY_PREFIX="%CONDA_PREFIX%\Library\"
   - "%CMD_IN_ENV% python setup.py build"
   - "%CMD_IN_ENV% python tables\\tests\\test_all.py --verbose"
