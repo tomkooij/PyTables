@@ -43,13 +43,6 @@ install:
   # as well as pip, conda-build, and the binstar CLI
   - powershell .\\ci\\appveyor\\install.ps1   
   - powershell ./appveyor/missing-headers.ps1
-  # install hdf5
-  - curl -O http://www.hdfgroup.org/ftp/HDF5/current/bin/windows/hdf5-1.8.17-win64-vs2013-shared.zip
-  - unzip hdf5-1.8.17-win64-vs2013-shared.zip
-  - cd hdf5
-  - msiexec /i HDF5-1.8.17-win64.msi /quiet /qn /norestart /log install.log
-  - type install.log
-  - cd ..
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PYTHON%\\Library\\bin;%PATH%"
 
 build: false
@@ -57,11 +50,13 @@ build: false
 test_script:
   #- cmd: conda create --yes -n buildenv python=%PYTHON_VERSION% numexpr cython
   #- cmd: activate buildenv
-  - cmd: conda install --yes numexpr cython
+  - cmd: conda install --yes numexpr cython hdf5
   # conda-forge has hdf5-1.8.17 with shared libs
   #  - cmd: conda install --yes --channel conda-forge hdf5 
-  - cmd: SET HDF5_DIR=/Program Files/HDF_Group/HDF5/1.8.17/
+  - cmd: set PATH=%CONDA_PREFIX%\\Library\\bin;%PATH%
   - cmd: echo %PATH%
   - cmd: env
+  - cmd: dir %PYTHON%\Library\Lib
+  - cmd: set HDF5_DIR="%PYTHON%\\Library\\"
   - "%CMD_IN_ENV% python setup.py build"
   - "%CMD_IN_ENV% python tables\\tests\\test_all.py --verbose"
