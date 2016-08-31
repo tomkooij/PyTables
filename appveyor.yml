@@ -58,6 +58,5 @@ test_script:
   - cmd: env
   - cmd: dir %PYTHON%\Library\Lib
   - cmd: set HDF5_DIR="%PYTHON%\\Library\\"
-  - cmd: set LIBRARY_PREFIX="%PYTHON%\Library\"
   - "%CMD_IN_ENV% python setup.py build"
   - "%CMD_IN_ENV% python tables\\tests\\test_all.py --verbose"
