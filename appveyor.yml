@@ -43,7 +43,7 @@ install:
   # as well as pip, conda-build, and the binstar CLI
   - powershell .\\ci\\appveyor\\install.ps1   
   - powershell ./appveyor/missing-headers.ps1
-  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%CONDA_PREFIX%\\Library\\bin;%PATH%"
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PYTHON%\\Library\\bin;%PATH%"
 
 build: false
 
