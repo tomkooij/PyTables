@@ -351,7 +351,7 @@ _cp = convert_path
 if os.name == 'posix':
     _Package = PosixPackage
     _platdep = {  # package tag -> platform-dependent components
-        'HDF5': ['hdf5'],
+        'HDF5': ['libhdf5'],
         'LZO2': ['lzo2'],
         'LZO': ['lzo'],
         'BZ2': ['bz2'],
