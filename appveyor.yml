@@ -53,7 +53,7 @@ test_script:
   - cmd: conda install --yes numexpr cython hdf5
   # conda-forge has hdf5-1.8.17 with shared libs
   #  - cmd: conda install --yes --channel conda-forge hdf5 
-  - cmd: set PATH=%CONDA_PREFIX%\\Library\\bin;%PATH%
+  - cmd: set PATH="%PYTHON%\\Library\\bin";%PATH%
   - cmd: echo %PATH%
   - cmd: env
   - cmd: dir %PYTHON%\Library\Lib
