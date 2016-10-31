@@ -28,6 +28,7 @@ environment:
     - PYTHON: "C:\\Miniconda35-x64"
       PYTHON_VERSION: "3.5"
       PYTHON_ARCH: "64"
+      INSTALL_HDF5: "True"
 
 matrix:
   fast_finish: true
@@ -40,12 +41,7 @@ install:
   - "set PATH=%PYTHON%;%PYTHON%\\Scripts;%PYTHON%\\Library\\bin;%PATH%"
   # HDF5
   - "set HDF5_DIR=C:\\Progra~1\\HDF_Group\\HDF5\\1.8.17"
-  - curl -O https://support.hdfgroup.org/ftp/HDF5/current/bin/windows/extra/hdf5-1.8.17-win64-vs2015-shared.zip
-  - unzip hdf5-1.8.17-win64-vs2015-shared.zip
-  - cd hdf5
-  - msiexec /i HDF5-1.8.17-win64.msi /quiet /qn /norestart /log install.log
-  - type install.log
-  - cd ..
+  -  ps: if ($env:INSTALL_HDF5 -eq "True") { curl -O https://support.hdfgroup.org/ftp/HDF5/current/bin/windows/extra/hdf5-1.8.17-win64-vs2015-shared.zip; unzip hdf5-1.8.17-win64-vs2015-shared.zip; cd hdf5; msiexec /i HDF5-1.8.17-win64.msi /quiet /qn /norestart /log install.log;     type install.log; cd ..}
 
 build_script:
   - conda install --yes %BUILD_DEPENDS%
