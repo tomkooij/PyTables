@@ -46,7 +46,7 @@ install:
   - cd ..
 
 build_script:
-  - conda install --yes numexpr cython bzip2
+  - conda install --yes numexpr cython bzip2 zlib
   - set BZIP2_DIR="%PYTHON%\\Library\\"
   - SET LIBRARY_PATH="%HDF5_DIR%\\lib"
   # Make sure the wheel works:
