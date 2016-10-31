@@ -51,7 +51,7 @@ build_script:
   - conda install --yes %BUILD_DEPENDS%
   - set BZIP2_DIR="%PYTHON%\\Library\\"
   - set LIBRARY_PATH="%HDF5_DIR%\\lib"
-  - set PATH="%HDF5_DIR%\\bin;%PATH%""
+  - "set PATH=%HDF5_DIR%\\bin;%PATH%"
   # Make sure the wheel works:
   # Build wheel and install using pip.
   - "%CMD_IN_ENV% python setup.py bdist_wheel"
