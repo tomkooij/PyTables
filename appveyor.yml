@@ -57,7 +57,6 @@ build_script:
   # Make sure the wheel works:
   # Build wheel and install using pip.
   - "%CMD_IN_ENV% python setup.py bdist_wheel"
-  - "%CMD_IN_ENV% python setup.py test"
 
 
 test_script:
