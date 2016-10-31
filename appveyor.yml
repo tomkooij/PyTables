@@ -49,11 +49,16 @@ install:
 
 build_script:
   - conda install --yes %BUILD_DEPENDS%
+  # make sure HDF5 .dlls are in PATH
+  - "set PATH=%PATH%;%HDF5_DIR%\\bin"
+
   - "set BZIP2_DIR=%PYTHON%\\Library\\"
   - "set LIBRARY_PATH=%HDF5_DIR%\\lib"
   # Make sure the wheel works:
   # Build wheel and install using pip.
   - "%CMD_IN_ENV% python setup.py bdist_wheel"
+  - "%CMD_IN_ENV% python setup.py test"
+
 
 test_script:
   # create test env
@@ -62,12 +67,6 @@ test_script:
 
   # install from wheel
   - pip install --no-index --find-links dist/ %PACKAGE_NAME%
-
-  # make sure HDF5 .dlls are in PATH (system librarys are not in the wheel!)
-  - "set PATH=%PATH%;%HDF5_DIR%\\bin"
-  - path
-  - dir %HDF5_DIR%
-  - "dir %HDF5_DIR%\\bin"
 
   - cd ..
   - python -m tables.tests.test_all
