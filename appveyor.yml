@@ -1,6 +1,8 @@
 environment:
 
   # Make setup.py include conda specific dll's in wheels
+  BUILD_DEPENDS: "numpy>=1.8.0 numexpr>=2.5.2 six cython bzip2 zlib"
+  TEST_DEPENDS: "numpy>=1.8.0 numexpr>=2.5.2 six"
   BUILDWHEEL: True
 
   global:
@@ -46,20 +48,23 @@ install:
   - cd ..
 
 build_script:
-  - conda install --yes numexpr cython bzip2 zlib
+  - conda install --yes %BUILD_DEPENDS%
   - set BZIP2_DIR="%PYTHON%\\Library\\"
   - SET LIBRARY_PATH="%HDF5_DIR%\\lib"
   # Make sure the wheel works:
   # Build wheel and install using pip.
   - "%CMD_IN_ENV% python setup.py bdist_wheel"
-  - cmd: dir /B dist\*whl >WHEEL
-  - cmd: set /p WHEEL=<WHEEL
-  - cmd: pip install dist\%WHEEL%
 
 test_script:
-  - cmd: cd ..
-  - cmd: python -m tables.tests.test_all
+    # create test env
+    - conda create --yes -n test_env python=%PYTHON_VERSION% %TEST_DEPENDS%
+    - activate test_env
+
+    # install from wheel
+    - pip install --no-index --find-links dist/ %PACKAGE_NAME%
+
+    - cd ..
+    - python -m tables.tests.test_all
 
 artifacts:
-  # download wheels
-  - path: dist\*
+    - path: "%REPO_DIR%\\dist\\*"
