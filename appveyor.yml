@@ -27,7 +27,8 @@ environment:
       PYTHON_VERSION: "3.5"
       PYTHON_ARCH: "64"
 
-    fast_finish: true
+matrix:
+  fast_finish: true
 
 install:
   # this installs the appropriate Miniconda (Py2/Py3, 32/64 bit),
