@@ -50,21 +50,22 @@ install:
 build_script:
   - conda install --yes %BUILD_DEPENDS%
   - set BZIP2_DIR="%PYTHON%\\Library\\"
-  - SET LIBRARY_PATH="%HDF5_DIR%\\lib"
+  - set LIBRARY_PATH="%HDF5_DIR%\\lib"
+  - set PATH="%HDF5_DIR%\\bin;%PATH%""
   # Make sure the wheel works:
   # Build wheel and install using pip.
   - "%CMD_IN_ENV% python setup.py bdist_wheel"
 
 test_script:
-    # create test env
-    - conda create --yes -n test_env python=%PYTHON_VERSION% %TEST_DEPENDS%
-    - activate test_env
+  # create test env
+  - conda create --yes -n test_env python=%PYTHON_VERSION% %TEST_DEPENDS%
+  - activate test_env
 
-    # install from wheel
-    - pip install --no-index --find-links dist/ %PACKAGE_NAME%
+  # install from wheel
+  - pip install --no-index --find-links dist/ %PACKAGE_NAME%
 
-    - cd ..
-    - python -m tables.tests.test_all
+  - cd ..
+  - python -m tables.tests.test_all
 
 artifacts:
-    - path: "%REPO_DIR%\\dist\\*"
+    - path: "dist\\*"
