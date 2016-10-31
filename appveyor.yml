@@ -53,8 +53,6 @@ build_script:
   - cmd: set /p WHEEL=<WHEEL
   - cmd: pip install dist\%WHEEL%
 
-build: false
-
 test_script:
   - cmd: cd ..
   - cmd: python -m tables.tests.test_all
