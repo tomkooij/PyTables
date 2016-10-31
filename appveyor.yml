@@ -27,6 +27,8 @@ environment:
       PYTHON_VERSION: "3.5"
       PYTHON_ARCH: "64"
 
+    fast_finish: true
+
 install:
   # this installs the appropriate Miniconda (Py2/Py3, 32/64 bit),
   # as well as pip, conda-build, and the binstar CLI
@@ -34,7 +36,7 @@ install:
   - powershell .\\ci\\appveyor\\missing-headers.ps1
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PYTHON%\\Library\\bin;%PATH%"
   # HDF5
-  - set HDF5_DIR = "C:\\Program Files\\HDF_Group\\HDF5\\1.8.17\\bin"
+  - set HDF5_DIR="C:\\Program Files\\HDF_Group\\HDF5\\1.8.17"
   - curl -O https://support.hdfgroup.org/ftp/HDF5/current/bin/windows/extra/hdf5-1.8.17-win64-vs2015-shared.zip
   - unzip hdf5-1.8.17-win64-vs2015-shared.zip
   - cd hdf5
