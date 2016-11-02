@@ -17,10 +17,6 @@ environment:
 #      PYTHON_VERSION: "2.7"
 #      PYTHON_ARCH: "32"
 
-    - PYTHON: "C:\\Miniconda-x64"
-      PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "64"
-      HDF5_VERSION: "1.8"
 
     - PYTHON: "C:\\Miniconda-x64"
       PYTHON_VERSION: "2.7"
@@ -31,10 +27,6 @@ environment:
 #      PYTHON_VERSION: "3.5"
 #      PYTHON_ARCH: "32"
 
-    - PYTHON: "C:\\Miniconda35-x64"
-      PYTHON_VERSION: "3.5"
-      PYTHON_ARCH: "64"
-      HDF5_VERSION: "1.8"
 
     - PYTHON: "C:\\Miniconda35-x64"
       PYTHON_VERSION: "3.5"
