@@ -1,1 +1,1 @@
-Bogus commit... this should never make it into the main PyTables repo..:)
+Bogus commit... this should never make repo..:)
