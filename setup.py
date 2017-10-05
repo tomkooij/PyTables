@@ -501,6 +501,10 @@ for arg in args:
     elif arg.find('--no-conda') == 0:
         CONDA_PREFIX = ''
         sys.argv.remove(arg)
+    elif arg.find('--no-avx2') == 0:
+        if 'avx2' in cpu_flags:
+            cpu_flags.remove('avx2')
+        sys.argv.remove(arg)
 
 USE_PKGCONFIG = True if USE_PKGCONFIG.upper() == 'TRUE' else False
 print('* USE_PKGCONFIG:', USE_PKGCONFIG)
