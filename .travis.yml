@@ -4,15 +4,10 @@ language: python
 dist: xenial
 
 python:
-  - 3.5
-  - 3.6
+  #- 3.5
+  #- 3.6
   - 3.7
-  - 3.8-dev
-
-jobs:
-  include:
-  - python: 3.7
-    arch: arm64
+  #- 3.8-dev
 
 addons:
   apt_packages:
@@ -28,11 +23,28 @@ install:
   - pip install dist/*.tar.gz
 
 script:
-  - cd .. && python -m tables.tests.test_all
+  - #cd .. && python -m tables.tests.test_all
   - pt2to3 -h
   - ptrepack -h
   - ptdump -h
   - pttree -h
+
+before_deploy:
+  - pip install sphinx sphinx_rtd_theme ipython
+  - cd doc
+  - make html
+  - touch build/.nojekyll
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: doc/build
+  verbose: true
+  on:
+    branch: make_docs  # master
+    python: 3.7
+    #tags: true
 
 notifications:
   webhooks:
